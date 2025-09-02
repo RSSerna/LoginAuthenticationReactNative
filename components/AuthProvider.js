@@ -5,11 +5,19 @@ import { View } from 'react-native';
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
+    
+    const login = (userData) => {
+        setUser(userData);
+    };
 
-  return (
-    <AuthContext.Provider value={{ user}}>
-      {children}
-    </AuthContext.Provider>
-  );
+    const logout = () => {
+        setUser(null);
+    };
+
+    return (
+        <AuthContext.Provider value={{ user, login, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
